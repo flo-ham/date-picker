@@ -1,7 +1,7 @@
 {
   "type": "package",
   "name": "FloydHamilton/date-picker",
-  "summary": "A date range picker.",
+  "summary": "A date range picker in elm.",
   "license": "MIT",
   "version": "1.0.0",
   "exposed-modules": ["DateRangePicker", "DateRangePicker.Range"],
