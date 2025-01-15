@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Browser
 import DateRangePicker as Picker
+import DateRangePicker.Translations as Translations
 import DateRangePicker.Range as Range exposing (Range)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -73,7 +74,7 @@ view { config, picker } =
                 Just range ->
                     dl []
                         [ dt [] [ text "Selected: " ]
-                        , dd [] [ text (Range.format Time.utc range) ]
+                        , dd [] [ text (Range.format Translations.defaults Time.utc range) ]
                         , dt [] [ text "toString: " ]
                         , dd [] [ code [] [ text (Range.toString range) ] ]
                         , dt [] [ text "JSON: " ]

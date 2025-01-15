@@ -76,6 +76,7 @@ module DateRangePicker exposing
 import Browser.Events as BE
 import DateRangePicker.Calendar as Calendar
 import DateRangePicker.Helpers as Helpers
+import DateRangePicker.Translations as Translations exposing (Translations)
 import DateRangePicker.Range as Range exposing (Range)
 import DateRangePicker.Step as Step exposing (Step)
 import Html exposing (..)
@@ -128,8 +129,8 @@ type alias Config =
   - `pickEnd`: Hint at the bottom of calendar, after user pick the first date
 
 -}
-type alias Translations =
-    Calendar.Translations
+type alias Translations = Translations.Translations
+
 
 
 {-| A [`Config`](#Config) featuring the following default values:
@@ -157,7 +158,7 @@ defaultConfig =
     , noRangeCaption = "N/A"
     , predefinedRanges = defaultPredefinedRanges
     , sticky = False
-    , translations = defaultTranslations
+    , translations = Translations.defaults
     , weekdayFormatter = Helpers.weekdayToString
     , weeksStartOn = Time.Mon
     , zone = Time.utc
@@ -440,14 +441,7 @@ handleEvent toMsg msg =
     update msg >> State >> toMsg
 
 
-defaultTranslations : Translations
-defaultTranslations =
-    { close = "Close"
-    , clear = "Clear"
-    , apply = "Apply"
-    , pickStart = "Hint: pick a start date"
-    , pickEnd = "Hint: pick an end date"
-    }
+
 
 
 defaultPredefinedRanges : Time.Zone -> Posix -> List ( String, Range )
@@ -572,7 +566,7 @@ panel toMsg (State internal) =
                         text baseCalendar.translations.pickStart
 
                     Step.Complete range ->
-                        range |> Range.format internal.config.zone |> text
+                        range |> Range.format internal.config.translations internal.config.zone |> text
                 ]
             , div [ class "EDRPFoot__actions" ]
                 [ if not internal.config.sticky then
@@ -635,7 +629,7 @@ view toMsg (State internal) =
             , "EDRP__input " ++ internal.config.inputClass |> String.trim |> class
             , HA.disabled internal.disabled
             , internal.current
-                |> Maybe.map (Range.format internal.config.zone)
+                |> Maybe.map (Range.format internal.config.translations internal.config.zone)
                 |> Maybe.withDefault internal.config.noRangeCaption
                 |> value
             , onClick <| handleEvent toMsg Open internal

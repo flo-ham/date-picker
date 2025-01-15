@@ -2,6 +2,7 @@ module DateRangePickerTest exposing (suite)
 
 import DateRangePicker
 import DateRangePicker.Calendar as Calendar
+import DateRangePicker.Translations as Translations
 import DateRangePicker.Helpers as Helpers
 import DateRangePicker.Range as Range exposing (Range)
 import Expect exposing (Expectation)
@@ -148,11 +149,11 @@ rangeTests =
             ]
         , describe "format"
             [ Range.create utc begin begin
-                |> Range.format utc
+                |> Range.format internal.config.translations utc
                 |> Expect.equal "on 2018-01-01"
                 |> asTest "should format a single day date range"
             , sampleRange
-                |> Range.format utc
+                |> Range.format Translations.defaults utc
                 |> Expect.equal "from 2018-01-01 to 2018-01-08"
                 |> asTest "should format a multiple days period date range"
             ]

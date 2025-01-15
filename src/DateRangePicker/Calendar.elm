@@ -1,24 +1,15 @@
-module DateRangePicker.Calendar exposing (Translations, fromPosix, view, weekdayNames)
+module DateRangePicker.Calendar exposing (fromPosix, view, weekdayNames)
 
 import DateRangePicker.Helpers as Helpers exposing (sameDay)
 import DateRangePicker.Range as Range
 import DateRangePicker.Step as Step exposing (Step)
+import DateRangePicker.Translations exposing (Translations)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import List.Extra as LE
 import Time exposing (Posix)
 import Time.Extra as TE
-
-
-type alias Translations =
-    { close : String
-    , clear : String
-    , apply : String
-    , pickStart : String
-    , pickEnd : String
-    }
-
 
 type alias Config msg =
     { allowFuture : Bool

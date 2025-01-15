@@ -23,6 +23,7 @@ module DateRangePicker.Range exposing
 
 -}
 
+import DateRangePicker.Translations exposing (Translations)
 import DateRangePicker.Helpers as Helpers
 import Iso8601
 import Json.Decode as Decode exposing (Decoder)
@@ -111,13 +112,18 @@ encode (Range { begin, end }) =
 
 {-| Formats a [`Range`](#Range) in simple fashion.
 -}
-format : Time.Zone -> Range -> String
-format zone (Range { begin, end }) =
+format : Translations -> Time.Zone -> Range -> String
+format translations zone (Range { begin, end }) =
     if Helpers.sameDay zone begin end then
-        "on " ++ Helpers.formatDate zone begin
+        translations.on ++ " " ++ Helpers.formatDate zone begin
 
     else
-        "from " ++ Helpers.formatDate zone begin ++ " to " ++ Helpers.formatDate zone end
+       translations.from
+          ++ " "
+          ++ Helpers.formatDate zone begin
+          ++ " " ++ translations.to
+          ++ " "
+          ++ Helpers.formatDate zone end
 
 
 {-| Extract a [`Range`](#Range) from a String, where the two Posix timestamps are

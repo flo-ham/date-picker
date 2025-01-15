@@ -1,6 +1,6 @@
 {
   "type": "package",
-  "name": "FloydHamilton/date-picker",
+  "name": "FloHam/date-picker",
   "summary": "A date range picker in elm.",
   "license": "MIT",
   "version": "1.0.0",
