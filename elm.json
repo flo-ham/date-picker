@@ -3,7 +3,7 @@
   "name": "FloydHamilton/date-range-picker",
   "summary": "A date range picker in elm.",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "exposed-modules": ["DateRangePicker", "DateRangePicker.Range"],
   "elm-version": "0.19.1 <= v <= 0.20.0",
   "dependencies": {
